@@ -1,5 +1,6 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:launch_pad/pad.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,76 +13,45 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Launch Pad",
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Launch Pad",
+            style: GoogleFonts.bebasNeue(fontSize: 30.0),
           ),
           backgroundColor: Colors.black,
           centerTitle: true,
         ),
-        body: const Wrap(
-          children: [Pad(Color(0xffaadbfc), Color(0xff067ccb), "audio_2.mp3")],
+        body: const Center(
+          child: Wrap(
+            spacing: 10.0,
+            runSpacing: 10.0,
+            clipBehavior: Clip.antiAlias,
+            children: [
+              Pad(Color(0xffaadbfc), Color(0xff067ccb), "audio_1.mp3"),
+              Pad(Color.fromARGB(255, 170, 252, 181),
+                  Color.fromARGB(255, 203, 75, 6), "audio_3.mp3"),
+              Pad(Color(0xffaadbfc), Color(0xff067ccb), "audio_2.mp3"),
+              Pad(Color.fromARGB(255, 181, 170, 252),
+                  Color.fromARGB(255, 193, 6, 203), "audio_10.mp3"),
+              Pad(Color(0xffaadbfc), Color(0xff067ccb), "audio_6.mp3"),
+              Pad(Color.fromARGB(255, 252, 251, 170),
+                  Color.fromARGB(255, 203, 6, 9), "audio_8.mp3"),
+              Pad(Color(0xffaadbfc), Color(0xff067ccb), "audio_7.mp3"),
+              Pad(Color.fromARGB(255, 170, 188, 252),
+                  Color.fromARGB(255, 6, 203, 39), "audio_5.mp3"),
+              Pad(Color(0xffaadbfc), Color(0xff067ccb), "audio_9.mp3"),
+              Pad(Color.fromARGB(255, 252, 251, 170),
+                  Color.fromARGB(255, 203, 6, 9), "audio_8.mp3"),
+              Pad(Color(0xffaadbfc), Color(0xff067ccb), "audio_7.mp3"),
+              Pad(Color.fromARGB(255, 181, 170, 252),
+                  Color.fromARGB(255, 193, 6, 203), "audio_10.mp3"),
+            ],
+          ),
         ),
-        backgroundColor: Colors.black,
-      ),
-    );
-  }
-}
-
-class Pad extends StatefulWidget {
-  final colorCenter;
-  final colorOutline;
-  final note;
-
-  const Pad(this.colorCenter, this.colorOutline, this.note, {super.key});
-
-  @override
-  State<Pad> createState() => _PadState();
-}
-
-class _PadState extends State<Pad> {
-  late Color _colorCenter;
-  late Color _colorOutline;
-  final player = AudioPlayer();
-
-  @override
-  void initState() {
-    _colorCenter = widget.colorCenter;
-    _colorOutline = widget.colorOutline;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        setState(() {
-          _colorCenter = Colors.white;
-          _colorOutline = Colors.white;
-          player.play(AssetSource("audio_1.mp3"));
-        });
-
-        await Future.delayed(const Duration(milliseconds: 300));
-
-        setState(() {
-          _colorCenter = widget.colorCenter;
-          _colorOutline = widget.colorOutline;
-        });
-      },
-      child: Container(
-        height: 100,
-        width: 100,
-        decoration: BoxDecoration(
-            gradient: RadialGradient(
-              colors: [_colorCenter, _colorOutline],
-              radius: 0.5,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-            boxShadow: const [
-              BoxShadow(color: Colors.pinkAccent, blurRadius: 8.0)
-            ]),
+        backgroundColor: Colors.black12,
       ),
     );
   }
